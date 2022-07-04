@@ -209,9 +209,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getOnline(): ?\DateTimeInterface
+    public function isOnline(): bool
     {
-        return $this->Online;
+        $now = new \DateTime();
+        $timeInBetween = $now->getTimestamp() - $this->Online->getTimestamp();
+        return $timeInBetween <= 60;
     }
 
     public function setOnline(\DateTimeInterface $Online): self
