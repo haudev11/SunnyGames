@@ -42,7 +42,7 @@ class UserController extends AbstractController
             'name'=>$name,
             'email'=> $email,
             'elo'=> $elo,
-            'online'=>$online,
+            'online'=>$online, 
         ],200);
     }
 }

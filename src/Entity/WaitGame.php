@@ -18,7 +18,7 @@ class WaitGame
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="WaitGame", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="WaitGame")
      * @ORM\JoinColumn(nullable=false)
      */
     private $UserID;

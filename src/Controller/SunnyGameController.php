@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/game", name="app_game")
- */
-
-class GameController extends AbstractController
+class SunnyGameController extends AbstractController
 {
     /**
-     * @Route("/newGame", name="app_new_game")
+     * @Route("/", name="app_homepage")
      */
+    public function index(): Response
+    {
+        return $this->render('sunny_game/homepage.html.twig', []);
+    }
 }

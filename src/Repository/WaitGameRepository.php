@@ -39,28 +39,31 @@ class WaitGameRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return WaitGame[] Returns an array of WaitGame objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('w.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return WaitGame[] Returns an array of WaitGame objects
+    */
+   public function findMatchElo($minElo, $maxElo, $userID): array
+   {
+       return $this->createQueryBuilder('w')
+           ->andWhere('w.MinElo >= :val1')
+           ->andWhere('w.MaxElo <= :val2')
+           ->andWhere('w.UserID <> :val3')
+           ->setParameter('val1', $minElo)
+           ->setParameter('val2', $maxElo)
+           ->setParameter('val3', $userID)
+           ->orderBy('w.WaitAt', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
-//    public function findOneBySomeField($value): ?WaitGame
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   public function findOneByID($userID): ?WaitGame
+   {
+       return $this->createQueryBuilder('w')
+           ->andWhere('w.UserID = :val')
+           ->setParameter('val', $userID)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
 }

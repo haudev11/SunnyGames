@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $GameUserTwo;
 
     /**
-     * @ORM\OneToOne(targetEntity=CurrentGame::class, mappedBy="UserOne", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=CurrentGame::class, mappedBy="UserOne")
      */
     private $CurrentGameOne;
 
@@ -316,7 +316,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+    public function getCurrentGame(): ?CurrentGame
+    {
+        if ($this->getCurrentGameOne() === null){
+            return $this->getCurrentGameOne();
+        }
+        return $this->getCurrentGameTwo();
+    }
     public function getWaitGame(): ?WaitGame
     {
         return $this->WaitGame;

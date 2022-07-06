@@ -23,23 +23,23 @@ class CurrentGame
     private $GamePlay;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
      */
     private $TimeUserOne;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
      */
     private $TimeUserTwo;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="CurrentGameOne", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="CurrentGameOne")
      * @ORM\JoinColumn(nullable=false)
      */
     private $UserOne;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="CurrentGameTwo", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="CurrentGameTwo")
      * @ORM\JoinColumn(nullable=false)
      */
     private $UserTwo;
@@ -66,24 +66,24 @@ class CurrentGame
         return $this;
     }
 
-    public function getTimeUserOne(): ?\DateTimeInterface
+    public function getTimeUserOne(): int
     {
         return $this->TimeUserOne;
     }
 
-    public function setTimeUserOne(\DateTimeInterface $TimeUserOne): self
+    public function setTimeUserOne(int $TimeUserOne): self
     {
         $this->TimeUserOne = $TimeUserOne;
 
         return $this;
     }
 
-    public function getTimeUserTwo(): ?\DateTimeInterface
+    public function getTimeUserTwo(): int
     {
         return $this->TimeUserTwo;
     }
 
-    public function setTimeUserTwo(\DateTimeInterface $TimeUserTwo): self
+    public function setTimeUserTwo(int $TimeUserTwo): self
     {
         $this->TimeUserTwo = $TimeUserTwo;
 
