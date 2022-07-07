@@ -30,7 +30,7 @@ class UserController extends AbstractController
     /**
      * @Route("/view/{id}", name="app_user_show")
      */
-    public function show($id, EntityManagerInterface $entityManager ): JsonResponse
+    public function show($id, EntityManagerInterface $entityManager ): Response
     {
         $reponsitory = $entityManager->getRepository(User::class);
         $user = $reponsitory->findOneBy(['id' => $id]);
@@ -38,11 +38,11 @@ class UserController extends AbstractController
         $name = $user->getName();
         $email = $user->getEmail();
         $online = $user->isOnline();
-        return $this->json([
+        return $this->render('user/view.html.twig', [
             'name'=>$name,
             'email'=> $email,
             'elo'=> $elo,
-            'online'=>$online, 
-        ],200);
+            'online'=>$online,
+        ]);
     }
 }

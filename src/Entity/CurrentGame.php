@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CurrentGameRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CurrentGameRepository;
 
 /**
  * @ORM\Entity(repositoryClass=CurrentGameRepository::class)
@@ -18,7 +19,7 @@ class CurrentGame
     private $id;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="text", length=1700)
      */
     private $GamePlay;
 
@@ -48,7 +49,12 @@ class CurrentGame
      * @ORM\Column(type="datetime")
      */
     private $GameAt;
-
+    private $NextMove;
+    
+    public function __construct()
+    {
+        $this->NextMove = $this->UserOne;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -124,5 +130,29 @@ class CurrentGame
         $this->GameAt = $GameAt;
 
         return $this;
+    }
+
+    // check validate move
+    private function ValidateMove($move):bool
+    {       
+        return true;
+    }
+    public function Move(User $User, $move):void
+    {
+        $this->GamePlay =  $this->GamePlay . $move;
+
+        if ($User != $this->NextMove){
+            return;
+        }
+        if (!ValidateMove($move)){
+            return;
+        }
+        $this->GamePlay =  $this->GamePlay . $move;
+        if ($this->NextMove === $this->UserOne){
+            $this->NextMove = $this->UserTwo;
+        } else {
+            $this->NextMove = $this->UserOne;
+        }
+        
     }
 }
