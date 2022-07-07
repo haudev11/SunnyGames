@@ -1,3 +1,64 @@
-h1 {
-  color: blue;
+body{
+  background-color: #f5f5f5;
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+  color: #313131;
+  font-family: "Roboto", sans-serif ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form h1 {
+  color: rgba(109, 212, 185, 0.904);
+  margin-top: 3px;
+  text-align: center;
+  font-weight: 480;
+  user-select: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .2);
+}
+.input-group{
+  background-color: aqua; 
+  margin: 20px;
+  position: relative;
+}
+form{
+  background-color: rgba(148, 167, 78, 0.789);
+  padding: 90px 60px;
+  box-shadow: 0.4px 4px 12px #000 ;
+  border-radius: 10px;
+}
+form input{
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-bottom: 2px solid dodgerblue;
+  outline: none;
+  padding: 5px 5px;
+}
+form h2 label {
+  position: absolute;
+  left: 10px;
+  top : 4px;
+  font-weight: 300;
+  font-size: 15px;
+  pointer-events: none;
+  color: gray;
+  transition: 200ms ease;
+}
+input:focus + label, input:valid + label{
+  top:-14px;
+  left: 10px;
+  color: red;
+  font-size: 14px;
+  color: dodgerblue;
+}
+form button{
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+  padding: 15px 5px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: 200ms;
+  box-shadow: 0.2px 2px 12px rgba(0, 0, 0, .2);
 }
