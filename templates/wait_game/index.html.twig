@@ -3,18 +3,26 @@
 {% block title %}Hello WaitGameController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'E:/symfonyProject/SunnyGames/SunnyGames/src/Controller/WaitGameController.php'|file_link(0) }}">src/Controller/WaitGameController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'E:/symfonyProject/SunnyGames/SunnyGames/templates/wait_game/index.html.twig'|file_link(0) }}">templates/wait_game/index.html.twig</a></code></li>
-    </ul>
+    <h1>wait game</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>MinElo</th>
+            <th>MaxElo</th>
+            <th>Join</th>
+        </tr>
+        {% for wait in waits %}
+            <tr>
+                <td>{{wait.id}}</td>
+                <td>{{wait.userID.Name}}</td>
+                <td>{{wait.minElo}}</td>
+                <td>{{wait.maxElo}}</td>
+                <td><a href="{{path('app_enter_game', {'id': wait.id }) }}">Join</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

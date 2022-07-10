@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/game", name="app_game")
+ * @Route("/game")
  */
 
 class GameController extends AbstractController

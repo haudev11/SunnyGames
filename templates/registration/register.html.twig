@@ -7,7 +7,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<form actions="{{path('app_login')}}"method="post">
+{# <form actions="{{path('app_login')}}"method="post">
     <h1>Register</h1>
     <div class="input-group" >
     <label for="inputEmail">Email</label>
@@ -26,9 +26,9 @@
     <input type="name" name="name" id="name" class="form-control" autocomplete="name" required autofocus>
     </div>
     <button type="submit" class="btn">Register</button>
-</form>
+</form> #}
     
-    {# {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
@@ -36,5 +36,5 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }} #}
+    {{ form_end(registrationForm) }}
 {% endblock %}

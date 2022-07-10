@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
- * @Route("/live", name="app_current_game")
+ * @Route("/live")
  */
 class CurrentGameController extends AbstractController
 {
@@ -19,9 +19,13 @@ class CurrentGameController extends AbstractController
      */
     public function view($id, EntityManagerInterface $entityManager): void
     {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        dd($user->getCurrentGame());
         $currentGames = $entityManager->getRepository(CurrentGame::class);
         $currentGame = $currentGames->findOneBy(['id' => $id]);
-        dd($currentGame);
+        $time = new \DateTime;
+        dd( $time->getTimestamp() - $currentGame->getLastMoveTime()->getTimestamp());
 
     }
 
