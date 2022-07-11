@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('css/view_wait_game.css')}}">
+{% endblock %}
+
+{% block title %}Hello WaitGameController!{% endblock %}
+
+{% block body %}
+    <h1>Wait game</h1>
+    <div class="join">
+        <div class="ip-group">
+            <label for="minElo">Min Elo</label>
+            <input type="number" id="minElo">
+        </div>
+        <div class="ip-group">
+            <label for="maxElo">Max Elo</label>
+            <input type="number" id="maxElo">
+        </div>
+        <button>Join</button>
+    </div>
+    <div class="container">
+        <div class="items">
+            <div class="item item-r">ID</div>
+            <div class="item item-r">Name</div>
+            <div class="item item-r">Min Elo</div>
+            <div class="item item-r">Max Elo</div>
+            <div class="item"> Join</div>
+        </div>
+        {% for wait in waits %}
+            <div class="items">
+                <div class="item item-r">{{wait.id}}</div>
+                <div class="item item-r">{{wait.userID.Name}}</div>
+                <div class="item item-r">{{wait.minElo}}</div>
+                <div class="item item-r">{{wait.maxElo}}</div>
+                <div class="item"> <a href="{{path('app_enter_game', {'id': wait.id }) }}">Join</a></div>
+            </div>
+        {% endfor %}
+    </div>
+
+        
+    </table>
+{% endblock %}

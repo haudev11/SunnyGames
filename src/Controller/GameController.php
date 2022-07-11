@@ -12,5 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
 {
-    
+    /**
+     * @Route("/newGame", name="app_new_game")
+     */
 }

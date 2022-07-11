@@ -1,0 +1,14 @@
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.container {
+  width: 700px;
+  height:700px;
+  border: 2px solid black;
+}

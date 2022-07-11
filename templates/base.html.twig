@@ -6,15 +6,52 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-           
+        <link rel="stylesheet" href="{{asset('css/base.css')}}">
         {% endblock %}
 
         {% block javascripts %}
-            
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         {% endblock %}
     </head>
     <body>
-
+        <nav>
+            <div class="nav-left">
+                <h2>SunnyGames</h2>
+            </div>
+            <ul>
+                <li><a class="nav-link" href="{{path('app_homepage')}}">Home</a></li>
+                <li><a class="nav-link" href="{{path('app_wait_game')}}">Play</a></li>
+                <li><a class="nav-link" href="{{path('app_users')}}">User</a></li>
+                {% if app.user %}
+                    <li><a class="nav-link" href="{{path('app_user_show', {'id': app.user.id})}}">Me</a></li>
+                    <li><a class="nav-link" href="{{path('app_logout')}}">Logout</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{{path('app_login')}}">Login</a></li>
+                    <li><a class="nav-link" href="{{path('app_register')}}">Sign up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
         {% block body %}{% endblock %}
+
+        <footer>
+            <div class="ft-left">
+                <h2>Sunny Games</h2>
+            </div>
+            <div class="ft-right">
+                <div class="ft-items">
+                    <ion-icon name="globe-outline"></ion-icon>
+                    <p>sunnygames.com</p>
+                </div>
+                <div class="ft-items">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <p>sunnygames@gmail.com</p>
+                </div>
+                <div class="ft-items">
+                    {# <img src="{{asset('imgs/github.svg')}}" alt="github"> #}
+                    <p>https://github.com/haudev11/SunnyGames</p>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('css/users.css')}}">
+{% endblock %}
+
+{% block title %}Hello WaitGameController!{% endblock %}
+
+{% block body %}
+    <h1>Top Users</h1>
+    <div class="join"></div>
+    <div class="container">
+        <div class="items">
+            <div class="item item-r">ID</div>
+            <div class="item item-r">Name</div>
+            <div class="item item-r">Elo</div>
+            <div class="item item-r">Online</div>
+            <div class="item"> View</div>
+        </div>
+        {% for user in users %}
+            <div class="items">
+                <div class="item item-r">{{user.id}}</div>
+                <div class="item item-r">{{user.Name}}</div>
+                <div class="item item-r">{{user.Elo}}</div>
+                <div class="item item-r">
+                  {% if user.isOnline() %}
+                    online
+                  {% else %}
+                    offline
+                  {% endif %}
+                  
+                </div>
+                <div class="item"> <a href="{{path('app_user_show', {'id': user.id }) }}">view</a></div>
+            </div>
+        {% endfor %}
+    </div>
+
+        
+    </table>
+{% endblock %}

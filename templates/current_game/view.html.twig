@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sunny Games{% endblock %}
+  {% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('css/current_game_view.css')}}">
+  {% endblock %}
+
+{% block body %}
+
+
+  <div class="container">
+    
+  </div>
+
+
+
+
+  {% block javascripts %}
+    {{parent()}}
+    <script src="{{asset('js/current_game_view.js')}}"></script>
+  {% endblock %}
+{% endblock %}

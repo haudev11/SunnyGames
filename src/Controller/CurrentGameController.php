@@ -19,15 +19,15 @@ class CurrentGameController extends AbstractController
     /**
      * @Route("/view/{id}", name="app_current_game_view")
      */
-    public function view($id, EntityManagerInterface $entityManager): void
+    public function view($id, EntityManagerInterface $entityManager): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-        dd($user->getCurrentGame());
         $currentGames = $entityManager->getRepository(CurrentGame::class);
         $currentGame = $currentGames->findOneBy(['id' => $id]);
-        $time = new \DateTime;
-        dd( $time->getTimestamp() - $currentGame->getLastMoveTime()->getTimestamp());
+        return $this->render('current_game/view.html.twig', [
+            'currentGames' =>$currentGame,
+        ]);
     }
 
     /**

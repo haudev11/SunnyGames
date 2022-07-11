@@ -23,7 +23,7 @@ class WaitGameController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $waits = $entityManager->getRepository(WaitGame::class)->findAll();
-        return $this->render('wait_game/index.html.twig', [
+        return $this->render('wait_game/view.html.twig', [
             'waits' => $waits,
         ]);
     }
