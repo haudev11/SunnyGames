@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\InviteGame;
+use App\Entity\CurrentGame;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,7 +59,7 @@ class InviteGameController extends AbstractController
         if ($user === $user2){
             return $this->json(['mes'=>'Invalid user'],200);
         }
-        $invites->remove($invite);
+        $invites->remove($invite, true);
         // add game for user1 and user2
         $game = new CurrentGame();
         $game->setUserOne($user1);
