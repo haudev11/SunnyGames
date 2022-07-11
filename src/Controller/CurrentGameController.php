@@ -26,7 +26,6 @@ class CurrentGameController extends AbstractController
         $currentGame = $currentGames->findOneBy(['id' => $id]);
         $time = new \DateTime;
         dd( $time->getTimestamp() - $currentGame->getLastMoveTime()->getTimestamp());
-
     }
 
     /**

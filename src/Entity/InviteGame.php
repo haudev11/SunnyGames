@@ -18,7 +18,7 @@ class InviteGame
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="inviteGame", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="inviteGame")
      * @ORM\JoinColumn(nullable=false)
      */
     private $FromID;

@@ -23,6 +23,7 @@ class CurrentGame
      */
     private $GamePlay;
 
+    
     /**
      * @ORM\Column(type="integer")
      */
@@ -49,11 +50,6 @@ class CurrentGame
      * @ORM\Column(type="datetime")
      */
     private $GameAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $LastMoveTime;
     
     public function __construct()
     {
@@ -157,18 +153,5 @@ class CurrentGame
         } else {
             $this->NextMove = $this->UserOne;
         }
-        
-    }
-
-    public function getLastMoveTime(): ?\DateTimeInterface
-    {
-        return $this->LastMoveTime;
-    }
-
-    public function setLastMoveTime(\DateTimeInterface $LastMoveTime): self
-    {
-        $this->LastMoveTime = $LastMoveTime;
-
-        return $this;
     }
 }

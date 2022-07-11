@@ -39,6 +39,7 @@ class UserController extends AbstractController
         $email = $user->getEmail();
         $online = $user->isOnline();
         return $this->render('user/view.html.twig', [
+            'id' => $user->getId(),
             'name'=>$name,
             'email'=> $email,
             'elo'=> $elo,
