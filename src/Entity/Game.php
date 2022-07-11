@@ -18,7 +18,7 @@ class Game
     private $id;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="text", length=1700)
      */
     private $GamePlay;
 
