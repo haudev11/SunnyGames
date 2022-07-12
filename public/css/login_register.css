@@ -1,0 +1,67 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+  color: #96e6a1;
+  font-family: "Roboto", sans-serif ;
+}
+.registration-form {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form h1{
+  color: #F5F0BB;
+  margin-top: 5px;
+  text-align: center;
+  font-weight: 560;
+  user-select: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .2);
+}
+.input-group{
+  background-color: none; 
+  margin: 20px;
+  position: relative;
+}
+form{
+  background-color: rgba(0, 0, 0, .2);
+  padding: 90px 60px;
+  box-shadow: 0.4px 4px 12px #000 ;
+  border-radius: 10px;
+  position: relative;
+}
+form input{
+  display: block;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+
+form label{
+  color: #000;
+  user-select: none;
+}
+input:focus {
+  border-bottom: 2px solid dodgerblue;
+}
+
+form button{
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+  padding: 15px 5px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: 200ms;
+  box-shadow: 0.2px 2px 12px rgba(0, 0, 0, .2);
+}
+.btn {
+  position: absolute;
+  width:67%;
+  bottom: 20px;
+}

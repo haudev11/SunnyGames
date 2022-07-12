@@ -1,23 +1,39 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Sunny Games{% endblock %}
   {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{asset('css/current_game_view.css')}}">
+    <link rel="stylesheet" href="{{asset('css/current_game_live.css')}}">
   {% endblock %}
-
 {% block body %}
 
-
   <div class="container">
-    
+    <div id="board" class="board">
+    </div>
+    <div id="info" >
+      <div id="UserOne" class="user">
+        <div class="name">{{currentGame.UserOne.name}}</div>
+        <div id="timeUserOne" class="time">{{currentGame.TimeUserOne}}</div>
+      </div>
+      <div class="user">
+        <div id="gameID">{{currentGame.id}}</div>
+      </div>
+      <div id="UserTwo" class="user">
+        <div class="name">{{currentGame.UserTwo.name}}</div>
+        <div id="timeUserTwo"class="time">{{currentGame.TimeUserTwo}}</div>
+      </div>
+    </div>
   </div>
-
-
-
-
-  {% block javascripts %}
-    {{parent()}}
-    <script src="{{asset('js/current_game_view.js')}}"></script>
+  {% block footer %}
   {% endblock %}
+  <div id="timeUserOneD" class="time disable">{{currentGame.TimeUserOne}}</div>
+  <div id="userID" class="disable">
+    {% if app.user == currentGame.UserOne %} 
+      1
+    {% else %}
+      2
+    {% endif %}
+  </div>
+  <div id="timeUserTwoD" class="time disable">{{currentGame.TimeUserTwo}}</div>
+  <script src="{{asset('js/current_game.js')}}"></script>
+
 {% endblock %}
+

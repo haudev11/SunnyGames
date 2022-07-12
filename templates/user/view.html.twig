@@ -1,3 +1,50 @@
+{% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('css/view_user.css')}}">
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{asset('js/user.js')}}"></script>
+{% endblock %}
 
-<a href="{{path('app_invite_user', {'id': id})}}">invite</a>
+{% block body %}
+    <div id="container" class="container">
+        <div class="item">Name: {{user.name}}</div>
+        <div class="item">Elo : {{user.Elo}}</div>
+        {% if app.user!=user %}
+            <div class="item invite"><a href="{{path('app_invite_user', {'id': user.id})}}">Invite</a></div>
+        {% endif %}
+    </div>
+    <div class="info">
+        <div class="info-item">Game</div>
+        {% if app.user == user %} 
+            <div class="info-item" onclick="showInvitions">Invitation</div>
+        {% endif %}
+    </div>
+    <div class="container">
+        {% for game in games %}
+                {% if (game.Result == 1 and user == game.UserOne)or
+                      (game.Result == 2 and user == game.UserTwo)%}
+                      <a class="game green" href="#">
+                        <div class="game-item ">{{game.id}}</div>
+                        <div class="game-item">{{game.UserOne.id}}</div>
+                        <div class="game-item">{{game.UserTwo.id}}</div>
+                        <div class="game-item">Win</div>
+                        <div class="game-item">{{game.GameAt.format('Y/m/d h:i:s')}}</div>
+                    </a>
+                {% else %}
+                    <a class="game red" href="#">
+                        <div class="game-item ">{{game.id}}</div>
+                        <div class="game-item">{{game.UserOne.id}}</div>
+                        <div class="game-item">{{game.UserTwo.id}}</div>
+                        <div class="game-item">Lose</div>
+                        <div class="game-item">{{game.GameAt.format('Y/m/d h:i:s')}}</div>
+                    </a>
+                {% endif %}
+                
+        {% endfor %}
+    </div>
+{% endblock %}
+

@@ -21,23 +21,80 @@ class CurrentGameController extends AbstractController
      */
     public function view($id, EntityManagerInterface $entityManager): Response
     {
+        $currentGames = $entityManager->getRepository(CurrentGame::class);
+        $currentGame = $currentGames->findOneBy(['id' => $id]);
+        return $this->render('current_game/view.html.twig', [
+            'currentGame' =>$currentGame,
+        ]);
+    }
+    /**
+     * @Route("/get/{id}", name="app_current_game_take")
+     */
+    public function getGame($id, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $currentGames = $entityManager->getRepository(CurrentGame::class);
+        $currentGame = $currentGames->findOneBy(['id' => $id]);
+        return $this->json([
+            'id' =>$currentGame->getId(),
+            'timeUserOne' => $currentGame->getTimeUserOne(),
+            'timeUserTwo' => $currentGame->getTimeUserTwo(),
+        ],200);
+    }
+    /**
+     * @Route("/lose/{id}", name="app_current_game_lose")
+     */
+    public function loseGame($id, EntityManagerInterface $entityManager): JsonResponse
+    {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
         $currentGames = $entityManager->getRepository(CurrentGame::class);
         $currentGame = $currentGames->findOneBy(['id' => $id]);
-        return $this->render('current_game/view.html.twig', [
-            'currentGames' =>$currentGame,
-        ]);
+        $users = $entityManager->getRepository(User::class);
+        $user1 = $users->findOneBy(array('id' => $currentGame->getUserOne()));
+        $user2 = $users->findOneBy(array('id' => $currentGame->getUserTwo()));
+        if ($user !== $user1 && $user !== $user2){
+            return $this->json(['mes'=>'Invalid user'],200);
+        }
+        $result = 1;
+        $count = 8;
+        if ($user == $user1){
+            $result = 2;
+            $count = -8;
+        }
+        $doneGame = new Game();
+        $doneGame->setUserOne($currentGame->getUserOne());
+            $doneGame->setUserTwo($currentGame->getUserTwo());
+            $doneGame->setGamePlay($currentGame->getGamePlay());
+            $doneGame->setGameAt($currentGame->getGameAt());
+            $doneGame->setResult($result);
+            $entityManager->persist($doneGame);
+            $entityManager->flush();
+            $currentGames->remove($currentGame, true);
+            // set Elo for win user and lose user
+            $user1 = $users->findOneBy(array('user' => $currentGame->getUserOne()));
+            $user2 = $users->findOneBy(array('user' => $currentGame->getUserTwo()));
+            $user1->setElo($user1->getElo() + $count);
+            $user2->setElo($user2->getElo() - $count);
+            $users->add($user1, true);
+            $users->add($user2, true);
+            return $this->json(['mes'=>$result],200);
     }
-
     /**
-     * @Route("/move/{id}", name="app_current_game_move")
+     * @Route("/waite/{id}", name="app_current_game_waite")
      */
-    public function move($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function waite($id, EntityManagerInterface $entityManager):JsonResponse 
+    {
+        $currentGames = $entityManager->getRepository(CurrentGame::class);
+        $currentGame = $currentGames->findOneBy(['id' => $id]);
+        return $this->json(['gamePlay'=>$currentGame->getGamePlay()],200);
+    }
+    /**
+     * @Route("/move/{id}/{move}", name="app_current_game_move")
+     */
+    public function move($id,$move, Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-        $move = $request->query->get('move');
         $currentGames = $entityManager->getRepository(CurrentGame::class);
         $currentGame = $currentGames->findOneBy(['id' => $id]);
         $users = $entityManager->getRepository(User::class);
@@ -66,8 +123,19 @@ class CurrentGameController extends AbstractController
             $entityManager->persist($doneGame);
             $entityManager->flush();
             $currentGames->remove($currentGame, true);
-            dd($doneGame);
-            return $this->json(['mes'=>'end'],200);
+
+            // set Elo for win user and lose user
+            $user1 = $users->findOneBy(array('user' => $currentGame->getUserOne()));
+            $user2 = $users->findOneBy(array('user' => $currentGame->getUserTwo()));
+            $count = 8;
+            if ($result != 1){
+                $count = -8;
+            }
+            $user1->setElo($user1->getElo() + $count);
+            $user2->setElo($user2->getElo() - $count);
+            $users->add($user1, true);
+            $users->add($user2, true);
+            return $this->json(['mes'=>$result],200);
         }
         return $this->json(['mes'=>'done'],200);
     }

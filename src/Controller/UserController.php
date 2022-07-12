@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use App\Entity\User;
+use App\Entity\InviteGame;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/updateOnline", name="app_user_update_online")
+     * @Route("/updateOnline",options={"option" = "export"}, name="app_user_update_online")
      */
     public function updateOnline(Request $request, EntityManagerInterface $entityManager ):JsonResponse
     {
@@ -32,18 +34,13 @@ class UserController extends AbstractController
      */
     public function show($id, EntityManagerInterface $entityManager ): Response
     {
-        $reponsitory = $entityManager->getRepository(User::class);
-        $user = $reponsitory->findOneBy(['id' => $id]);
-        $elo = $user->getElo();
-        $name = $user->getName();
-        $email = $user->getEmail();
-        $online = $user->isOnline();
+        $user = $entityManager->getRepository(User::class)->findOneBy(array('id' => $id));
+        $games = $entityManager->getRepository(Game::class)->findByUser($user);
+        $invite = $entityManager->getRepository(InviteGame::class)->findBy(array('ToID'=>$user));;
         return $this->render('user/view.html.twig', [
-            'id' => $user->getId(),
-            'name'=>$name,
-            'email'=> $email,
-            'elo'=> $elo,
-            'online'=>$online,
+            'user' => $user,
+            'games' => $games,
+            'invite' => $invite,
         ]);
     }
 }

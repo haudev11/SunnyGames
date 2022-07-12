@@ -167,7 +167,7 @@ class CurrentGame
     }
     public function getUserMove() :User {
 
-        if (strlen($this->GamePlay) / 4 % 2) {
+        if (strlen($this->GamePlay) / 4 % 2 == 0) {
             return $this->UserOne;
         }
         return $this->UserTwo;

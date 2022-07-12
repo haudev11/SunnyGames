@@ -33,3 +33,7 @@ h1{
 a{
   text-decoration: none;
 }
+.item-h{
+  font-size: 30px;
+  text-shadow: 2px 2px black;
+}

@@ -2,16 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Sunny Game{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
         <link rel="stylesheet" href="{{asset('css/base.css')}}">
-        {% endblock %}
-
-        {% block javascripts %}
-            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         {% endblock %}
     </head>
     <body>
@@ -24,6 +19,9 @@
                 <li><a class="nav-link" href="{{path('app_wait_game')}}">Play</a></li>
                 <li><a class="nav-link" href="{{path('app_users')}}">User</a></li>
                 {% if app.user %}
+                    {% if app.user.getCurrentGame()!= NULL %}
+                        <li><a class="nav-link" href="{{path('app_current_game_view', {'id': app.user.getCurrentGame.id})}}">Game</a></li>
+                    {% endif %}
                     <li><a class="nav-link" href="{{path('app_user_show', {'id': app.user.id})}}">Me</a></li>
                     <li><a class="nav-link" href="{{path('app_logout')}}">Logout</a></li>
                 {% else %}
@@ -33,7 +31,7 @@
             </ul>
         </nav>
         {% block body %}{% endblock %}
-
+        {% block footer %}
         <footer>
             <div class="ft-left">
                 <h2>Sunny Games</h2>
@@ -53,5 +51,19 @@
                 </div>
             </div>
         </footer>
+        {% endblock %}
+
+
+        {% if app.user %}
+            <script>
+                    const base_url = "http://localhost:8000/";
+                    const userUpdate = setInterval(function() {
+                    let xhr = new XMLHttpRequest();
+                    let url = base_url + "user/updateOnline/";
+                    xhr.open('GET', url, true);
+                    xhr.send();
+                }, 5000);
+            </script>
+        {% endif %} 
     </body>
 </html>

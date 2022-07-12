@@ -1,40 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{parent()}}
-    <link rel="stylesheet" href="{{asset('css/register.css')}}">
+    <link rel="stylesheet" href="{{asset('css/login_register.css')}}">
 {% endblock %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
-{# <form actions="{{path('app_login')}}"method="post">
-    <h1>Register</h1>
-    <div class="input-group" >
-    <label for="inputEmail">Email</label>
-    <input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <div class="registration-form">
+        {{ form_start(registrationForm) }}
+            <h1>Sin up</h1>
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'   
+            }) }}
+            <button type="submit" class="btn">Register</button>
+        {{ form_end(registrationForm) }}
     </div>
-    <div class="input-group" >
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    </div>
-    <div class="input-group" >
-    <label for="inputrepassword">RePassword</label>
-    <input type="repassword" name="repassword" id="repassword" class="form-control" autocomplete="current-password" required>
-    </div>
-    <div class="input-group">
-    <label for="name">Name</label>
-    <input type="name" name="name" id="name" class="form-control" autocomplete="name" required autofocus>
-    </div>
-    <button type="submit" class="btn">Register</button>
-</form> #}
-    
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}
