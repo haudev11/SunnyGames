@@ -47,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="integer")
      */
+    
     private $Elo;
 
     /**
@@ -89,6 +90,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $InvitedGame;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $age;
+
     public function __construct()
     {
         $this->GameUserOne = new ArrayCollection();
@@ -99,6 +105,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getage(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
     }
 
     public function getEmail(): ?string

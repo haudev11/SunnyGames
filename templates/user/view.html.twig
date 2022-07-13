@@ -12,6 +12,7 @@
 {% block body %}
     <div id="container" class="container">
         <div class="item">Name: {{user.name}}</div>
+        <div class="item">Age: {{user.age}}</div>
         <div class="item">Elo : {{user.Elo}}</div>
         {% if app.user!=user %}
             <div class="item invite"><a href="{{path('app_invite_user', {'id': user.id})}}">Invite</a></div>
