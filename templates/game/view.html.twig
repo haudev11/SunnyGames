@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+  {% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('css/game.css')}}">
+  {% endblock %}
+{% block body %}
+<div id="userID" class="disable">{{app.user.id}}</div>
+  <div class="container">
+    <div id="board" class="board">
+    </div>
+    <div id="info" >
+      <div id="UserOne" class="user">
+        <div class="name">{{currentGame.UserOne.name}}</div>
+        <div id="user1ID" class="disable">{{currentGame.UserOne.id}}</div>
+      <div id="UserTwo" class="user">
+        <div class="name">{{currentGame.UserTwo.name}}</div>
+        <div id="user2ID" class="disable">{{currentGame.UserTwo.id}}</div>
+      </div>
+    </div>
+  </div>
+  <div id="gamePlay" class="disable">{{currentGame.gamePlay}}</div>
+  {% block footer %}
+  {% endblock %}
+  <script src="{{asset('js/game.js')}}"></script>
+
+{% endblock %}
+
