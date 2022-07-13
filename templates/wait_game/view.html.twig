@@ -34,7 +34,12 @@
                 <div class="item item-r">{{wait.userID.Name}}</div>
                 <div class="item item-r">{{wait.minElo}}</div>
                 <div class="item item-r">{{wait.maxElo}}</div>
-                <div class="item"> <a href="{{path('app_enter_game', {'id': wait.id }) }}">Join</a></div>
+                <div class="item"> 
+                    {% if app.user %}
+                        <a href="{{path('app_enter_game', {'id': wait.id }) }}">Join</a>
+                    {% else %}
+                        <a href="{{path('app_login') }}">Join</a>
+                    {% endif %}</div>
             </div>
         {% endfor %}
     </div>

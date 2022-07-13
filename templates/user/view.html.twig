@@ -28,7 +28,7 @@
         {% for game in games %}
                 {% if (game.Result == 1 and user == game.UserOne)or
                       (game.Result == 2 and user == game.UserTwo)%}
-                      <a class="game green" href="#">
+                      <a class="game green" href="{{path('app_view_game', {'id': game.id})}}">
                         <div class="game-item ">{{game.id}}</div>
                         <div class="game-item">{{game.UserOne.id}}</div>
                         <div class="game-item">{{game.UserTwo.id}}</div>
@@ -36,7 +36,7 @@
                         <div class="game-item">{{game.GameAt.format('Y/m/d h:i:s')}}</div>
                     </a>
                 {% else %}
-                    <a class="game red" href="#">
+                    <a class="game red" href="{{path('app_view_game', {'id': game.id})}}">
                         <div class="game-item ">{{game.id}}</div>
                         <div class="game-item">{{game.UserOne.id}}</div>
                         <div class="game-item">{{game.UserTwo.id}}</div>
