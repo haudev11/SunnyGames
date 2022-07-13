@@ -18,7 +18,7 @@
             <label for="maxElo">Max Elo</label>
             <input type="number" id="maxElo">
         </div>
-        <button>Join</button>
+        <button id="submit">Join</button>
     </div>
     <div class="container">
         <div class="items">
@@ -38,4 +38,5 @@
             </div>
         {% endfor %}
     </div>
+    <script src="{{asset('js/waitGame.js')}}"></script>
 {% endblock %}

@@ -41,3 +41,7 @@ h1{
 .item-h {
   font-weight: bold;
 }
+#joinGame {
+  width: 70px;
+  height: 25px;
+}

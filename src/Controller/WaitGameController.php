@@ -28,9 +28,9 @@ class WaitGameController extends AbstractController
         ]);
     }
     /**
-     * @Route("/joinGame/", name="app_join_game")
+     * @Route("/joinGame/{minElo}/{maxElo}", name="app_join_game")
      */
-    public function joinGame(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function joinGame($minElo, $maxElo, Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
@@ -40,8 +40,8 @@ class WaitGameController extends AbstractController
         $game = new WaitGame();
         $game->setUserID($user);
         $game->setWaitAt(new \DateTime());
-        $game->setMinElo($request->query->get('minElo'));
-        $game->setMaxElo($request->query->get('maxElo'));
+        $game->setMinElo($minElo);
+        $game->setMaxElo($maxElo);
         $entityManager->persist($game);
         $entityManager->flush();
         return $this->json(['wait'=>'oke'],200);
