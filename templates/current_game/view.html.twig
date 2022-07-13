@@ -4,13 +4,14 @@
     <link rel="stylesheet" href="{{asset('css/current_game_live.css')}}">
   {% endblock %}
 {% block body %}
-
+<div id="userID" class="disable">{{app.user.id}}</div>
   <div class="container">
     <div id="board" class="board">
     </div>
     <div id="info" >
       <div id="UserOne" class="user">
         <div class="name">{{currentGame.UserOne.name}}</div>
+        <div id="user1ID" class="disable">{{currentGame.UserOne.id}}</div>
         <div id="timeUserOne" class="time">{{currentGame.TimeUserOne}}</div>
       </div>
       <div class="user">
@@ -18,6 +19,7 @@
       </div>
       <div id="UserTwo" class="user">
         <div class="name">{{currentGame.UserTwo.name}}</div>
+        <div id="user2ID" class="disable">{{currentGame.UserTwo.id}}</div>
         <div id="timeUserTwo"class="time">{{currentGame.TimeUserTwo}}</div>
       </div>
     </div>
@@ -25,13 +27,6 @@
   {% block footer %}
   {% endblock %}
   <div id="timeUserOneD" class="time disable">{{currentGame.TimeUserOne}}</div>
-  <div id="userID" class="disable">
-    {% if app.user == currentGame.UserOne %} 
-      1
-    {% else %}
-      2
-    {% endif %}
-  </div>
   <div id="timeUserTwoD" class="time disable">{{currentGame.TimeUserTwo}}</div>
   <script src="{{asset('js/current_game.js')}}"></script>
 

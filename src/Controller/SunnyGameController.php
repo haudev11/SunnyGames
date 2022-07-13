@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\CurrentGame;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,9 +14,14 @@ class SunnyGameController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('sunny_game/homepage.html.twig', []);
+        $users = $entityManager->getRepository(User::class)->findAll();
+        $games = $entityManager->getRepository(CurrentGame::class)->findAll();
+        return $this->render('sunny_game/homepage.html.twig', [
+            'users' => count($users),
+            'games' => count($games),
+        ]);
     }
     /**
      * @Route("/users", name="app_users")

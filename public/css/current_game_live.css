@@ -28,6 +28,8 @@
   border-radius: 2px;
   cursor: pointer;
   background-color: #7A86B6;
+  color: white;
+  text-align: center;
 }
 .item:hover {
   background-color: #ECB390;
@@ -39,9 +41,6 @@
   border: 3px solid #1F4690;
   font-size: 30px;
   text-align: center;
-}
-.time {
-
 }
 .disable {
   font-size: 0;

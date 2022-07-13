@@ -23,7 +23,7 @@
             <div class="info-item" onclick="showInvitions">Invitation</div>
         {% endif %}
     </div>
-    <div class="container">
+    <div id="games"class="container">
         {% for game in games %}
                 {% if (game.Result == 1 and user == game.UserOne)or
                       (game.Result == 2 and user == game.UserTwo)%}

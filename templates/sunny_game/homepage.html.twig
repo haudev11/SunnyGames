@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello SunnyGameController!{% endblock %}
+{% block stylesheets %}
+  {{parent()}}
+  <link rel="stylesheet" href="{{asset('css/home_page.css')}}">
+{% endblock %}
 
 {% block body %}
-
+  <div class="container">
+    <div class="ss-left">
+      <img class="imgs" src="{{asset('images/img1.svg')}}" alt="Tic Tac Toe">
+      <div class="info">
+        <div>
+          User registration: {{users}}
+        </div>
+        <div>
+          Current Games: {{games}}
+        </div>
+      </div>
+    </div>
+    <div class="ss-right">
+     
+    </div>
+  </div>
 {% endblock %}

@@ -41,6 +41,15 @@ class CurrentGameController extends AbstractController
         ],200);
     }
     /**
+     * @Route("/whomove/{id}", name="app_current_game_who_move")
+     */
+    public function whoMove($id, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $currentGames = $entityManager->getRepository(CurrentGame::class);
+        $currentGame = $currentGames->findOneBy(['id' => $id]);
+        return $this->json(['id'=> $currentGame->getUserMove()->getId()],200);
+    }
+    /**
      * @Route("/lose/{id}", name="app_current_game_lose")
      */
     public function loseGame($id, EntityManagerInterface $entityManager): JsonResponse
